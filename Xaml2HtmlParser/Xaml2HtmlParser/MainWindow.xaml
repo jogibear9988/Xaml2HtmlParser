@@ -3,14 +3,40 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Xaml2HtmlParser"
+        xmlns:avalonedit="http://icsharpcode.net/sharpdevelop/avalonedit"
+        xmlns:sd="http://sharpdevelop.net"
+        xmlns:wpf="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
+    <Grid Background="Yellow">
         <Grid.ColumnDefinitions>
 			<ColumnDefinition Width="0.5*" />
 			<ColumnDefinition Width="0.5*" />
 		</Grid.ColumnDefinitions>
-		<Separator Width="6" HorizontalAlignment="Right" Background="DarkGray" VerticalAlignment="Stretch"/>
-    </Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="0.5*" />
+			<RowDefinition Height="0.5*" />
+		</Grid.RowDefinitions>
+		<Separator Width="6" HorizontalAlignment="Right" Background="DarkGray" VerticalAlignment="Stretch" Grid.RowSpan="2"/>
+		<Separator Height="6" HorizontalAlignment="Stretch" Background="DarkGray" VerticalAlignment="Bottom" Grid.ColumnSpan="2"/>
+		<avalonedit:TextEditor x:Name="textXaml" Margin="6" SyntaxHighlighting="XML" ShowLineNumbers="True" MouseDoubleClick="TextXaml_OnMouseDoubleClick" />
+		<sd:DesignSurface x:Name="editorXaml" Grid.Row="1"  Margin="6"/>
+		<avalonedit:TextEditor x:Name="textHtml" Grid.Column="1" Margin="6" SyntaxHighlighting="HTML" ShowLineNumbers="True" />
+		<wpf:ChromiumWebBrowser x:Name="viewHtml" Grid.Row="1" Grid.Column="1"  Margin="6"
+                                  Address="www.google.de"
+                                  Title="aa"
+								HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+								MinWidth="200" MinHeight="200"
+                                  AllowDrop="True"
+                                  >
+			<!-- Just an example of how you may override the BrowserSettings. Disabled by default since it looks so
+                         incredibly ugly... -->
+			<!--<cefSharp:ChromiumWebBrowser.BrowserSettings>
+                        <CefSharp:BrowserSettings MinimumFontSize="36" />
+                    </cefSharp:ChromiumWebBrowser.BrowserSettings>-->
+		</wpf:ChromiumWebBrowser>
+
+
+	</Grid>
 </Window>
+
